@@ -29,8 +29,8 @@
 
 #include "lzf.h"
 
-#ifndef ULTRA_FAST
-#define ULTRA_FAST 1
+#ifndef PHP_LZF_ULTRA_FAST
+#define PHP_LZF_ULTRA_FAST 1
 #endif
 
 /* {{{ lzf_functions[]
@@ -75,7 +75,7 @@ PHP_MINFO_FUNCTION(lzf)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "lzf support", "enabled");
-#if ULTRA_FAST
+#if PHP_LZF_ULTRA_FAST
 	php_info_print_table_row(2, "optimized for", "speed");
 #else
 	php_info_print_table_row(2, "optimized for", "compression quality");
@@ -159,7 +159,7 @@ PHP_FUNCTION(lzf_decompress)
    Return 1 if lzf was optimized for speed, 0 for compression */
 PHP_FUNCTION(lzf_optimized_for)
 {
-	RETURN_LONG(ULTRA_FAST);
+	RETURN_LONG(PHP_LZF_ULTRA_FAST);
 }
 
 /* }}} */

@@ -57,7 +57,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #else
-#define ULTRA_FAST 1
+#define PHP_LZF_ULTRA_FAST 1
 #endif
 
 /*

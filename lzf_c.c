@@ -150,7 +150,7 @@ lzf_compress (const void *const in_data, unsigned int in_len,
 
 	  *op++ = off;
 
-#if ULTRA_FAST
+#if PHP_LZF_ULTRA_FAST
           ip += len;
           hval = FRST (ip);
           hval = NEXT (hval, ip);
