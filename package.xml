@@ -17,11 +17,11 @@
  </maintainers>
 
  <release>
-  <version>0.1</version>
-  <date>2003-10-14</date>
+  <version>1.0</version>
+  <date>2003-10-24</date>
   <state>stable</state>
   <notes>
-   This is the first release of LZF extension.
+   This release adds win32 support.
   </notes>
   <filelist>
     <dir role="src" name="/">
@@ -34,6 +34,7 @@
         <file role="src">lzfP.h</file>
 		<file role="src">lzf_c.c</file>
 		<file role="src">lzf_d.c</file>
+		<file role="src">lzf.dsp</file>
      </dir>
   </filelist>
  </release>
