@@ -40,6 +40,7 @@ PHP_MINFO_FUNCTION(lzf);
 
 PHP_FUNCTION(lzf_compress);
 PHP_FUNCTION(lzf_decompress);
+PHP_FUNCTION(lzf_optimized_for);
 
 #endif	/* PHP_LZF_H */
 

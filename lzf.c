@@ -34,8 +34,9 @@
  * Every user visible function must have an entry in lzf_functions[].
  */
 function_entry lzf_functions[] = {
-	PHP_FE(lzf_compress,	NULL)
-	PHP_FE(lzf_decompress,	NULL)
+	PHP_FE(lzf_compress,		NULL)
+	PHP_FE(lzf_decompress,		NULL)
+	PHP_FE(lzf_optimized_for,	NULL)
 	{NULL, NULL, NULL}	/* Must be the last line in lzf_functions[] */
 };
 /* }}} */
@@ -69,7 +70,12 @@ ZEND_GET_MODULE(lzf)
 PHP_MINFO_FUNCTION(lzf)
 {
 	php_info_print_table_start();
-	php_info_print_table_header(2, "lzf support", "enabled");
+	php_info_print_table_row(2, "lzf support", "enabled");
+#if ULTRA_FAST
+	php_info_print_table_row(2, "optimized for", "speed");
+#else
+	php_info_print_table_row(2, "optimized for", "compression quality");
+#endif
 	php_info_print_table_end();
 }
 /* }}} */
@@ -130,6 +136,10 @@ PHP_FUNCTION(lzf_decompress)
     } while (result == 0 && errno == E2BIG);
 
 	if (result == 0) {
+		if (errno == EINVAL) {
+        	php_error(E_WARNING, "%s LZF decompression failed, compressed data corrupted", get_active_function_name(TSRMLS_C));
+		}
+
 		efree(buffer);
         RETURN_FALSE;
     }
@@ -139,6 +149,15 @@ PHP_FUNCTION(lzf_decompress)
 
     RETURN_STRINGL(buffer, result, 0);
 }
+/* }}} */
+
+/* {{{ proto int lzf_optimized_for()
+   Return 1 if lzf was optimized for speed, 0 for compression */
+PHP_FUNCTION(lzf_optimized_for)
+{
+	RETURN_LONG(ULTRA_FAST);
+}
+
 /* }}} */
 
 /*
