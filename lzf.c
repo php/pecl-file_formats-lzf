@@ -59,7 +59,7 @@ zend_module_entry lzf_module_entry = {
 	NULL,
 	PHP_MINFO(lzf),
 #if ZEND_MODULE_API_NO >= 20010901
-	"1.0", /* Replace with version number for your extension */
+	"1.2", /* Replace with version number for your extension */
 #endif
 	STANDARD_MODULE_PROPERTIES
 };
