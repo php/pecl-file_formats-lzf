@@ -29,6 +29,10 @@
 
 #include "lzf.h"
 
+#ifndef ULTRA_FAST
+#define ULTRA_FAST 1
+#endif
+
 /* {{{ lzf_functions[]
  *
  * Every user visible function must have an entry in lzf_functions[].

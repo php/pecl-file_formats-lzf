@@ -54,7 +54,11 @@
  * In short: enable this for binary data, disable this for text data.
  */
 
+#ifdef HAVE_CONFIG_H
 #include "config.h"
+#else
+#define ULTRA_FAST 1
+#endif
 
 /*
 #ifndef ULTRA_FAST

@@ -17,11 +17,11 @@
  </maintainers>
 
  <release>
-  <version>1.0</version>
-  <date>2003-10-24</date>
+  <version>1.1</version>
+  <date>2003-10-25</date>
   <state>stable</state>
   <notes>
-   This release adds win32 support.
+   Broken win32 build fixed.
   </notes>
   <filelist>
     <dir role="src" name="/">
