@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE package SYSTEM "../package.dtd">
-<package version="1.0">
+<package>
  <name>LZF</name>
  <summary>LZF compression.</summary>
  <description>
@@ -17,25 +17,34 @@
  </maintainers>
 
  <release>
-  <version>1.1</version>
-  <date>2003-10-25</date>
+  <version>1.2</version>
+  <date>2004-01-07</date>
   <state>stable</state>
   <notes>
-   Broken win32 build fixed.
+   Added test files and improved PEAR installer support.
   </notes>
+  <configureoptions>
+    <configureoption name="enable-lzf-better-compression" default="no" prompt="Sacrifice speed in favour of compression ratio?"/>
+  </configureoptions>
   <filelist>
     <dir role="src" name="/">
         <file role="doc">CREDITS</file>
-		<file role="doc">EXPERIMENTAL</file>
+        <file role="doc">EXPERIMENTAL</file>
+
         <file role="src">config.m4</file>
         <file role="src">php_lzf.h</file>
         <file role="src">lzf.c</file>
         <file role="src">lzf.h</file>
         <file role="src">lzfP.h</file>
-		<file role="src">lzf_c.c</file>
-		<file role="src">lzf_d.c</file>
-		<file role="src">lzf.dsp</file>
+        <file role="src">lzf_c.c</file>
+        <file role="src">lzf_d.c</file>
+        <file role="src">lzf.dsp</file>
+
+        <file role="test" name="tests/001.phpt"/>
+        <file role="test" name="tests/002.phpt"/>
+        <file role="test" name="tests/003.phpt"/>
      </dir>
   </filelist>
  </release>
 </package>
+
