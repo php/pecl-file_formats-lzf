@@ -32,6 +32,7 @@
         <file role="doc">EXPERIMENTAL</file>
 
         <file role="src">config.m4</file>
+		<file role="src">config.w32</file>
         <file role="src">php_lzf.h</file>
         <file role="src">lzf.c</file>
         <file role="src">lzf.h</file>
