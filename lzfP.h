@@ -53,9 +53,14 @@
  * 9-10% for small, redundant, blocks and >>20% better speed in both cases)
  * In short: enable this for binary data, disable this for text data.
  */
+
+#include "config.h"
+
+/*
 #ifndef ULTRA_FAST
 # define ULTRA_FAST 1
 #endif
+*/
 
 /*
  * unconditionally aligning does not cost very much, so do it if unsure
