@@ -17,11 +17,11 @@
  </maintainers>
 
  <release>
-  <version>1.2</version>
-  <date>2004-01-07</date>
+  <version>1.3</version>
+  <date>2004-08-14</date>
   <state>stable</state>
   <notes>
-   Added test files and improved PEAR installer support.
+   Upgraded bundled liblzf to the latest version.
   </notes>
   <configureoptions>
     <configureoption name="enable-lzf-better-compression" default="no" prompt="Sacrifice speed in favour of compression ratio?"/>
@@ -29,7 +29,6 @@
   <filelist>
     <dir role="src" name="/">
         <file role="doc">CREDITS</file>
-        <file role="doc">EXPERIMENTAL</file>
 
         <file role="src">config.m4</file>
         <file role="src">config.w32</file>
