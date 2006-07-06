@@ -17,11 +17,11 @@
  </maintainers>
 
  <release>
-  <version>1.3</version>
-  <date>2004-08-14</date>
+  <version>1.4</version>
+  <date>2006-07-06</date>
   <state>stable</state>
   <notes>
-   Upgraded bundled liblzf to the latest version.
+   Bugfix release.
   </notes>
   <configureoptions>
     <configureoption name="enable-lzf-better-compression" default="no" prompt="Sacrifice speed in favour of compression ratio?"/>
