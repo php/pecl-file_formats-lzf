@@ -91,25 +91,25 @@ PHP_FUNCTION(lzf_compress)
 {
 	char *retval, *arg = NULL;
 	int arg_len, result;
-	
+
 	if (ZEND_NUM_ARGS() != 1 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	
+
 	retval = emalloc(arg_len + LZF_MARGIN);
 	if (!retval) {
 		RETURN_FALSE;
 	}
-	
+
 	result = lzf_compress(arg, arg_len, retval, arg_len + LZF_MARGIN);
 	if (result == 0) {
 		efree(retval);
 		RETURN_FALSE;
 	}
-	
+
 	retval = erealloc(retval, result + 1);
 	retval[result] = 0;
-	
+
 	RETURN_STRINGL(retval, result, 0);
 }
 /* }}} */
@@ -122,35 +122,35 @@ PHP_FUNCTION(lzf_decompress)
 	int arg_len, result, i = 1;
 	char *buffer;
 	size_t buffer_size = 1024;
-	
+
 	if (ZEND_NUM_ARGS() != 1 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
-	
+
 	buffer = emalloc(buffer_size);
 	if (!buffer) {
 		RETURN_FALSE;
 	}
-	
+
 	do {
 		buffer_size *= i++;
 		buffer = erealloc(buffer, buffer_size);
-		
+
 		result = lzf_decompress(arg, arg_len, buffer, buffer_size);
 	} while (result == 0 && errno == E2BIG);
-	
+
 	if (result == 0) {
 		if (errno == EINVAL) {
 			php_error(E_WARNING, "%s LZF decompression failed, compressed data corrupted", get_active_function_name(TSRMLS_C));
 		}
-		
+
 		efree(buffer);
 		RETURN_FALSE;
 	}
-	
+
 	buffer = erealloc(buffer, result + 1);
 	buffer[result] = 0;
-	
+
 	RETURN_STRINGL(buffer, result, 0);
 }
 /* }}} */
