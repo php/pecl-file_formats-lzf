@@ -59,7 +59,7 @@ zend_module_entry lzf_module_entry = {
 	NULL,
 	PHP_MINFO(lzf),
 	#if ZEND_MODULE_API_NO >= 20010901
-	"1.5", /* Replace with version number for your extension */
+	PHP_LZF_VERSION, /* Replace with version number for your extension */
 	#endif
 	STANDARD_MODULE_PROPERTIES
 };
@@ -74,7 +74,8 @@ ZEND_GET_MODULE(lzf)
 PHP_MINFO_FUNCTION(lzf)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "lzf support", "enabled");
+	php_info_print_table_header(2, "lzf support", "enabled");
+	php_info_print_table_row(2, "version", PHP_LZF_VERSION);
 	#if PHP_LZF_ULTRA_FAST
 	php_info_print_table_row(2, "optimized for", "speed");
 	#else
