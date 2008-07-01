@@ -17,15 +17,15 @@ http://pear.php.net/dtd/package-2.0.xsd">
  <date>2008-07-01</date>
  <time>14:17:34</time>
  <version>
-  <release>1.5</release>
-  <api>1.5</api>
+  <release>1.5.0</release>
+  <api>1.5.0</api>
  </version>
  <stability>
   <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
- <notes>Bugfix release; updated bundled library to new version (1.6).
+ <notes>Updated bundled library to the newest version.
  </notes>
  <contents>
   <dir name="/">
@@ -60,4 +60,84 @@ http://pear.php.net/dtd/package-2.0.xsd">
  <extsrcrelease>
   <configureoption default="no" name="enable-lzf-better-compression" prompt="Sacrifice speed in favour of compression ratio?" />
  </extsrcrelease>
+ <changelog>
+  <release>
+   <version>
+    <release>1.4</release>
+    <api>1.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-07-06</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Bugfix release.</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3</release>
+    <api>1.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-08-14</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Upgraded bundled liblzf to the latest version.</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2</release>
+    <api>1.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-01-07</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Added test files and improved PEAR installer support.</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1</release>
+    <api>1.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-10-25</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Broken win32 build fixed.</notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-10-24</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This release adds win32 support.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.1</release>
+    <api>0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-10-14</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>This is the first release of LZF extension.</notes>
+  </release>
+ </changelog>
 </package>
