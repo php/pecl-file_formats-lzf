@@ -1,50 +1,63 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE package SYSTEM "../package.dtd">
-<package>
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.6.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
  <name>LZF</name>
+ <channel>pecl.php.net</channel>
  <summary>LZF compression.</summary>
- <description>
-  This package handles LZF de/compression.
+ <description>This package handles LZF de/compression.
  </description>
- <license>PHP License</license>
- <maintainers>
-  <maintainer>
-   <user>mg</user>
-   <name>Marcin Gibula</name>
-   <email>mg@iceni.pl</email>
-   <role>lead</role>
-  </maintainer>
- </maintainers>
-
- <release>
-  <version>1.5</version>
-  <date>2006-07-29</date>
-  <state>stable</state>
-  <notes>
-   Bugfix release; updated bundled library to new version (1.6).
-  </notes>
-  <configureoptions>
-    <configureoption name="enable-lzf-better-compression" default="no" prompt="Sacrifice speed in favour of compression ratio?"/>
-  </configureoptions>
-  <filelist>
-    <dir role="src" name="/">
-        <file role="doc">CREDITS</file>
-
-        <file role="src">config.m4</file>
-        <file role="src">config.w32</file>
-        <file role="src">php_lzf.h</file>
-        <file role="src">lzf.c</file>
-        <file role="src">lzf.h</file>
-        <file role="src">lzfP.h</file>
-        <file role="src">lzf_c.c</file>
-        <file role="src">lzf_d.c</file>
-        <file role="src">lzf.dsp</file>
-
-        <file role="test" name="tests/001.phpt"/>
-        <file role="test" name="tests/002.phpt"/>
-        <file role="test" name="tests/003.phpt"/>
-     </dir>
-  </filelist>
- </release>
+ <lead>
+  <name>Marcin Gibula</name>
+  <user>mg</user>
+  <email>mg@iceni.pl</email>
+  <active>yes</active>
+ </lead>
+ <date>2008-07-01</date>
+ <time>14:17:34</time>
+ <version>
+  <release>1.5</release>
+  <api>1.5</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.php.net/license">PHP License</license>
+ <notes>Bugfix release; updated bundled library to new version (1.6).
+ </notes>
+ <contents>
+  <dir name="/">
+   <dir name="tests">
+    <file name="001.phpt" role="test" />
+    <file name="002.phpt" role="test" />
+    <file name="003.phpt" role="test" />
+   </dir> <!-- //tests -->
+   <file name="config.m4" role="src" />
+   <file name="config.w32" role="src" />
+   <file name="CREDITS" role="doc" />
+   <file name="lzf.c" role="src" />
+   <file name="lzf.dsp" role="src" />
+   <file name="lzf.h" role="src" />
+   <file name="lzfP.h" role="src" />
+   <file name="lzf_c.c" role="src" />
+   <file name="lzf_d.c" role="src" />
+   <file name="php_lzf.h" role="src" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <providesextension>LZF</providesextension>
+ <extsrcrelease>
+  <configureoption default="no" name="enable-lzf-better-compression" prompt="Sacrifice speed in favour of compression ratio?" />
+ </extsrcrelease>
 </package>
-
