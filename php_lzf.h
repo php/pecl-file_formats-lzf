@@ -24,7 +24,7 @@
 extern zend_module_entry lzf_module_entry;
 #define phpext_lzf_ptr &lzf_module_entry
 
-#define PHP_LZF_VERSION "1.5.0"
+#define PHP_LZF_VERSION "1.5.1"
 
 #ifdef PHP_WIN32
 #define PHP_LZF_API __declspec(dllexport)
