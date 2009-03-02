@@ -24,7 +24,10 @@
 extern zend_module_entry lzf_module_entry;
 #define phpext_lzf_ptr &lzf_module_entry
 
-#define PHP_LZF_VERSION "1.5.2"
+extern php_stream_filter_factory php_lzf_compress_filter_factory;
+extern php_stream_filter_factory php_lzf_decompress_filter_factory;
+
+#define PHP_LZF_VERSION "1.6.0"
 
 #ifdef PHP_WIN32
 #define PHP_LZF_API __declspec(dllexport)
@@ -39,6 +42,8 @@ extern zend_module_entry lzf_module_entry;
 #define LZF_MARGIN	128
 
 PHP_MINFO_FUNCTION(lzf);
+PHP_MINIT_FUNCTION(lzf);
+PHP_MSHUTDOWN_FUNCTION(lzf);
 
 PHP_FUNCTION(lzf_compress);
 PHP_FUNCTION(lzf_decompress);

@@ -53,8 +53,8 @@ zend_module_entry lzf_module_entry = {
 	#endif
 	"lzf",
 	lzf_functions,
-	NULL,
-	NULL,
+	PHP_MINIT(lzf),
+	PHP_MSHUTDOWN(lzf),
 	NULL,
 	NULL,
 	PHP_MINFO(lzf),
@@ -68,6 +68,24 @@ zend_module_entry lzf_module_entry = {
 #ifdef COMPILE_DL_LZF
 ZEND_GET_MODULE(lzf)
 #endif
+
+/* {{{ PHP_MINIT_FUNCTION
+*/
+PHP_MINIT_FUNCTION(lzf)
+{
+	php_stream_filter_register_factory("lzf.compress", &php_lzf_compress_filter_factory TSRMLS_CC);
+	php_stream_filter_register_factory("lzf.decompress", &php_lzf_decompress_filter_factory TSRMLS_CC);
+}
+/* }}} */
+
+/* {{{ PHP_MSHUTDOWN_FUNCTION
+*/
+PHP_MSHUTDOWN_FUNCTION(lzf)
+{
+	php_stream_filter_unregister_factory("lzf.compress" TSRMLS_CC);
+	php_stream_filter_unregister_factory("lzf.decompress" TSRMLS_CC);
+}
+/* }}} */
 
 /* {{{ PHP_MINFO_FUNCTION
 */

@@ -14,5 +14,5 @@ if test "$PHP_LZF" != "no"; then
     AC_DEFINE(PHP_LZF_ULTRA_FAST,0,[ ])
   fi
 
-  PHP_NEW_EXTENSION(lzf, lzf.c lzf_c.c lzf_d.c, $ext_shared)
+  PHP_NEW_EXTENSION(lzf, lzf.c lzf_c.c lzf_d.c filter.c, $ext_shared)
 fi
