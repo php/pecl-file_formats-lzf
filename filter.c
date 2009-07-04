@@ -1,4 +1,5 @@
 #include "php.h"
+#include "lzf.h"
 
 #define LZF_BLOCKSIZE	(1024 * 64 - 1)
 
@@ -142,7 +143,7 @@ static int lzf_compress_append_data(
 
 		/* If the buffer is full, we need to flush it */
 		if (inst->buffer_pos == LZF_BLOCKSIZE) {
-			if (lzf_compress_filter_append_bucket(stream, exit_status, inst, buckets_out, persistent) != SUCCESS)
+			if (lzf_compress_filter_append_bucket(stream, exit_status, inst, buckets_out, persistent TSRMLS_CC) != SUCCESS)
 				return FAILURE;
 		}
 	}
@@ -207,7 +208,7 @@ static void lzf_filter_state_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 {
 	assert(thisfilter->abstract != NULL);
 
-	php_lzf_filter_state_dtor((php_lzf_filter_state *) thisfilter->abstract);
+	php_lzf_filter_state_dtor((php_lzf_filter_state *) thisfilter->abstract TSRMLS_CC);
 	pefree(thisfilter->abstract, ((php_lzf_filter_state *) thisfilter->abstract)->persistent);
 }
 
