@@ -37,7 +37,7 @@ $Id$
 *
 * Every user visible function must have an entry in lzf_functions[].
 */
-function_entry lzf_functions[] = {
+zend_function_entry lzf_functions[] = {
 	PHP_FE(lzf_compress,		NULL)
 	PHP_FE(lzf_decompress,		NULL)
 	PHP_FE(lzf_optimized_for,	NULL)
