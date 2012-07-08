@@ -44,6 +44,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
    <file name="lzf_c.c" role="src" />
    <file name="lzf_d.c" role="src" />
    <file name="php_lzf.h" role="src" />
+   <file name="filter.c" role="src" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
