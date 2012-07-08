@@ -1,0 +1,16 @@
+// $Id$
+// vim:ft=javascript
+
+ARG_ENABLE("lzf", "LZF support", "no");
+
+ARG_ENABLE("lzf-better-compression", "trade off speed for better compression ratio", "no");
+
+if (PHP_LZF != "no") {
+
+	EXTENSION('lzf', 'lzf.c lzf_c.c lzf_d.c filter.c');
+
+	AC_DEFINE('PHP_LZF_ULTRA_FAST', PHP_LZF_BETTER_COMPRESSION != "yes" ? 1 : 0);
+	AC_DEFINE('HAVE_LZF', 1);
+
+}
+
