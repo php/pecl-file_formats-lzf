@@ -3,6 +3,8 @@ filter lzf.decompress
 --SKIPIF--
 <?php if (!extension_loaded("lzf")) print "skip"; ?>
 <?php if (!function_exists("base64_encode")) print "skip"; ?>
+--XFAIL--
+Decompress filter is not implemented
 --POST--
 --GET--
 --INI--
