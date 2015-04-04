@@ -41,7 +41,11 @@ zend_function_entry lzf_functions[] = {
 	PHP_FE(lzf_compress,		NULL)
 	PHP_FE(lzf_decompress,		NULL)
 	PHP_FE(lzf_optimized_for,	NULL)
+#ifdef PHP_FE_END
+	PHP_FE_END
+#else
 	{NULL, NULL, NULL}	/* Must be the last line in lzf_functions[] */
+#endif
 };
 /* }}} */
 
@@ -75,6 +79,8 @@ PHP_MINIT_FUNCTION(lzf)
 {
 	php_stream_filter_register_factory("lzf.compress", &php_lzf_compress_filter_factory TSRMLS_CC);
 	php_stream_filter_register_factory("lzf.decompress", &php_lzf_decompress_filter_factory TSRMLS_CC);
+
+	return SUCCESS;
 }
 /* }}} */
 
@@ -84,6 +90,8 @@ PHP_MSHUTDOWN_FUNCTION(lzf)
 {
 	php_stream_filter_unregister_factory("lzf.compress" TSRMLS_CC);
 	php_stream_filter_unregister_factory("lzf.decompress" TSRMLS_CC);
+
+	return SUCCESS;
 }
 /* }}} */
 
@@ -110,7 +118,7 @@ Return a string compressed with LZF */
 PHP_FUNCTION(lzf_compress)
 {
 	char *retval, *arg = NULL;
-	int arg_len, result;
+	strsize_t arg_len, result;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
 		WRONG_PARAM_COUNT;
@@ -127,10 +135,10 @@ PHP_FUNCTION(lzf_compress)
 		RETURN_FALSE;
 	}
 
-	retval = erealloc(retval, result + 1);
 	retval[result] = 0;
 
-	RETURN_STRINGL(retval, result, 0);
+	_RETVAL_STRINGL(retval, result);
+	efree(retval);
 }
 /* }}} */
 
@@ -139,7 +147,7 @@ Return a string decompressed with LZF */
 PHP_FUNCTION(lzf_decompress)
 {
 	char *arg = NULL;
-	int arg_len, result, i = 1;
+	strsize_t arg_len, result, i = 1;
 	char *buffer;
 	size_t buffer_size = 1024;
 
@@ -168,10 +176,10 @@ PHP_FUNCTION(lzf_decompress)
 		RETURN_FALSE;
 	}
 
-	buffer = erealloc(buffer, result + 1);
 	buffer[result] = 0;
 
-	RETURN_STRINGL(buffer, result, 0);
+	_RETVAL_STRINGL(buffer, result);
+	efree(buffer);
 }
 /* }}} */
 

@@ -1,5 +1,6 @@
 #include "php.h"
 #include "lzf.h"
+#include "php_lzf.h"
 
 #define LZF_BLOCKSIZE	(1024 * 64 - 1)
 
@@ -160,7 +161,7 @@ static php_stream_filter_status_t lzf_compress_filter(
 	int flags TSRMLS_DC)
 {
 	size_t consumed = 0;
-	php_lzf_filter_state *inst = (php_lzf_filter_state *) thisfilter->abstract;
+	php_lzf_filter_state *inst = (php_lzf_filter_state *) Z_PTR(thisfilter->abstract);
 	php_stream_filter_status_t exit_status = PSFS_FEED_ME;
 	php_stream_bucket *bucket = NULL;
 
@@ -208,8 +209,8 @@ static void lzf_filter_state_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 {
 	assert(thisfilter->abstract != NULL);
 
-	php_lzf_filter_state_dtor((php_lzf_filter_state *) thisfilter->abstract TSRMLS_CC);
-	pefree(thisfilter->abstract, ((php_lzf_filter_state *) thisfilter->abstract)->persistent);
+	php_lzf_filter_state_dtor((php_lzf_filter_state *) Z_PTR(thisfilter->abstract) TSRMLS_CC);
+	pefree(Z_PTR(thisfilter->abstract), ((php_lzf_filter_state *) Z_PTR(thisfilter->abstract))->persistent);
 }
 
 static php_stream_filter_ops lzf_compress_ops = {

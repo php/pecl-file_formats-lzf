@@ -49,6 +49,19 @@ PHP_FUNCTION(lzf_compress);
 PHP_FUNCTION(lzf_decompress);
 PHP_FUNCTION(lzf_optimized_for);
 
+#if PHP_MAJOR_VERSION < 7
+typedef long zend_long;
+typedef int strsize_t;
+#define _RETVAL_STRINGL(a,l)  RETVAL_STRINGL(a,l,1)
+#define Z_PTR(p) (p)
+#else
+typedef size_t strsize_t;
+#define TSRMLS_C
+#define TSRMLS_CC
+#define TSRMLS_DC
+#define _RETVAL_STRINGL(a,l)  RETVAL_STRINGL(a,l)
+#endif
+
 #endif	/* PHP_LZF_H */
 
 
