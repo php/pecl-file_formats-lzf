@@ -9,7 +9,7 @@ if (PHP_LZF != "no") {
 
 	if( CHECK_HEADER_ADD_INCLUDE("lzf.h", "CFLAGS_LZF", PHP_LZF + ";" + configure_module_dirname + "\\lib")) {
 		EXTENSION('lzf', 'lzf.c filter.c');
-		ADD_SOURCES(configure_module_dirname + "/lib", "lzf_c.c lzf_d.c");
+		ADD_SOURCES(configure_module_dirname + "/lib", "lzf_c.c lzf_d.c", "lzf");
 
 		AC_DEFINE('PHP_LZF_ULTRA_FAST', PHP_LZF_BETTER_COMPRESSION != "yes" ? 1 : 0);
 		AC_DEFINE('HAVE_LZF', 1);
