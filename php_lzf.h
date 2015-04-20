@@ -27,7 +27,7 @@ extern zend_module_entry lzf_module_entry;
 extern php_stream_filter_factory php_lzf_compress_filter_factory;
 extern php_stream_filter_factory php_lzf_decompress_filter_factory;
 
-#define PHP_LZF_VERSION "1.6.2"
+#define PHP_LZF_VERSION "1.6.3"
 
 #ifdef PHP_WIN32
 #define PHP_LZF_API __declspec(dllexport)
