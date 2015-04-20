@@ -7,11 +7,15 @@ ARG_ENABLE("lzf-better-compression", "trade off speed for better compression rat
 
 if (PHP_LZF != "no") {
 
-	EXTENSION('lzf', 'lzf.c filter.c');
-	ADD_SOURCES(configure_module_dirname + "/lib", "lzf_c.c lzf_d.c");
+	if( CHECK_HEADER_ADD_INCLUDE("lzf.h", "CFLAGS_LZF", PHP_LZF + ";" + configure_module_dirname + "\\lib")) {
+		EXTENSION('lzf', 'lzf.c filter.c');
+		ADD_SOURCES(configure_module_dirname + "/lib", "lzf_c.c lzf_d.c");
 
-	AC_DEFINE('PHP_LZF_ULTRA_FAST', PHP_LZF_BETTER_COMPRESSION != "yes" ? 1 : 0);
-	AC_DEFINE('HAVE_LZF', 1);
+		AC_DEFINE('PHP_LZF_ULTRA_FAST', PHP_LZF_BETTER_COMPRESSION != "yes" ? 1 : 0);
+		AC_DEFINE('HAVE_LZF', 1);
+	} else {
+		WARNING("lzf not enabled; libraries and headers not found");
+	}
 
 }
 
