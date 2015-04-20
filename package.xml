@@ -20,10 +20,10 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>mg@iceni.pl</email>
   <active>yes</active>
  </lead>
- <date>2012-07-08</date>
+ <date>2015-04-20</date>
  <time>13:45:00</time>
  <version>
-  <release>1.6.2</release>
+  <release>1.6.3</release>
   <api>1.5.0</api>
  </version>
  <stability>
@@ -31,7 +31,10 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
- <notes>Fixed package.xml
+ <notes>
+- PHP 7 compatibility
+- move liblzf sources to /lib directory
+- add --with-liblzf option to use system liblzf
  </notes>
  <contents>
   <dir name="/">
@@ -39,6 +42,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
     <file name="001.phpt" role="test" />
     <file name="002.phpt" role="test" />
     <file name="003.phpt" role="test" />
+    <file name="004.phpt" role="test" />
    </dir> <!-- //tests -->
    <dir name="lib">
     <file name="README" role="doc" />
@@ -72,6 +76,20 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <configureoption default="no" name="enable-lzf-better-compression" prompt="Sacrifice speed in favour of compression ratio?" />
  </extsrcrelease>
  <changelog>
+  <release>
+   <date>2012-07-08</date>
+   <version>
+    <release>1.6.2</release>
+    <api>1.5.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>Fixed package.xml
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.6.1</release>
