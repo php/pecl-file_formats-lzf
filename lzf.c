@@ -101,13 +101,17 @@ PHP_MINFO_FUNCTION(lzf)
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "lzf support", "enabled");
-	php_info_print_table_row(2, "version", PHP_LZF_VERSION);
-	/*php_info_print_table_row(2, "lzf API version", LZF_VERSION);*/
+	php_info_print_table_row(2, "extension version", PHP_LZF_VERSION);
+#ifdef HAVE_LIBLZF
+	php_info_print_table_row(2, "liblzf version", "system");
+#else
+	php_info_print_table_row(2, "liblzf version", "bundled");
 	#if PHP_LZF_ULTRA_FAST
 	php_info_print_table_row(2, "optimized for", "speed");
 	#else
 	php_info_print_table_row(2, "optimized for", "compression quality");
 	#endif
+#endif
 	php_info_print_table_end();
 }
 /* }}} */
