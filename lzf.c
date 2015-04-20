@@ -31,14 +31,21 @@
 #define PHP_LZF_ULTRA_FAST 1
 #endif
 
+ZEND_BEGIN_ARG_INFO_EX(lzf_arg_string, 0, 0, 1)
+  ZEND_ARG_INFO(0, string)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(lzf_arg_none, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
 /* {{{ lzf_functions[]
 *
 * Every user visible function must have an entry in lzf_functions[].
 */
 zend_function_entry lzf_functions[] = {
-	PHP_FE(lzf_compress,		NULL)
-	PHP_FE(lzf_decompress,		NULL)
-	PHP_FE(lzf_optimized_for,	NULL)
+	PHP_FE(lzf_compress,		lzf_arg_string)
+	PHP_FE(lzf_decompress,		lzf_arg_string)
+	PHP_FE(lzf_optimized_for,	lzf_arg_none)
 #ifdef PHP_FE_END
 	PHP_FE_END
 #else
@@ -189,7 +196,11 @@ PHP_FUNCTION(lzf_decompress)
 Return 1 if lzf was optimized for speed, 0 for compression */
 PHP_FUNCTION(lzf_optimized_for)
 {
+#ifdef HAVE_LIBLZF
+	RETURN_FALSE;
+#else
 	RETURN_LONG(PHP_LZF_ULTRA_FAST);
+#endif
 }
 
 /* }}} */

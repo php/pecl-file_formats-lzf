@@ -37,6 +37,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
 - add --with-liblzf option to use system liblzf
 - add LICENSE file in documentation
 - adapt Windows build (Anatol)
+- add arginfo for reflection
  </notes>
  <contents>
   <dir name="/">
