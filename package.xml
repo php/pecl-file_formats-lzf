@@ -35,6 +35,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
 - PHP 7 compatibility
 - move liblzf sources to /lib directory
 - add --with-liblzf option to use system liblzf
+- add LICENSE file in documentation
  </notes>
  <contents>
   <dir name="/">
@@ -55,6 +56,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
    <file name="config.m4" role="src" />
    <file name="config.w32" role="src" />
    <file name="CREDITS" role="doc" />
+   <file name="LICENSE" role="doc" />
    <file name="lzf.c" role="src" />
    <file name="lzf.dsp" role="src" />
    <file name="php_lzf.h" role="src" />
