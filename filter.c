@@ -225,7 +225,11 @@ static php_stream_filter_status_t lzf_decompress_filter(
 
 static void lzf_filter_state_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 {
+#if PHP_MAJOR_VERSION < 7
 	assert(thisfilter->abstract != NULL);
+#else
+	assert(Z_PTR(thisfilter->abstract) != NULL);
+#endif
 
 	php_lzf_filter_state_dtor((php_lzf_filter_state *) Z_PTR(thisfilter->abstract) TSRMLS_CC);
 	pefree(Z_PTR(thisfilter->abstract), ((php_lzf_filter_state *) Z_PTR(thisfilter->abstract))->persistent);
