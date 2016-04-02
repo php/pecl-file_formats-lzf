@@ -164,14 +164,11 @@ PHP_FUNCTION(lzf_decompress)
 		WRONG_PARAM_COUNT;
 	}
 
-	buffer = emalloc(buffer_size);
-	if (!buffer) {
-		RETURN_FALSE;
-	}
+	buffer = emalloc(buffer_size + 1);
 
 	do {
 		buffer_size *= i++;
-		buffer = erealloc(buffer, buffer_size);
+		buffer = erealloc(buffer, buffer_size + 1);
 
 		result = lzf_decompress(arg, arg_len, buffer, buffer_size);
 	} while (result == 0 && errno == E2BIG);
