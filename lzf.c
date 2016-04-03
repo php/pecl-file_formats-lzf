@@ -156,19 +156,23 @@ Return a string decompressed with LZF */
 PHP_FUNCTION(lzf_decompress)
 {
 	char *arg = NULL;
-	strsize_t arg_len, result, i = 1;
+	strsize_t arg_len, result;
 	char *buffer;
-	size_t buffer_size = 1024;
+	size_t buffer_size = 0;
 
 	if (ZEND_NUM_ARGS() != 1 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
-	buffer = emalloc(buffer_size + 1);
-
 	do {
-		buffer_size *= i++;
-		buffer = erealloc(buffer, buffer_size + 1);
+		if (buffer_size) {
+			buffer = safe_erealloc(buffer, buffer_size, 2, 1);
+			buffer_size *= 2;
+		} else {
+			buffer_size = (arg_len > 512 ? arg_len : 512);
+			buffer = safe_emalloc(buffer_size, 2, 1);
+			buffer_size *= 2;
+		}
 
 		result = lzf_decompress(arg, arg_len, buffer, buffer_size);
 	} while (result == 0 && errno == E2BIG);

@@ -32,7 +32,8 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
-- 
+- optimize lzf_decompress on large input (~20%)
+- use safe allocation to avoid integer overflow
  </notes>
  <contents>
   <dir name="/">
