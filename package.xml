@@ -44,6 +44,9 @@ http://pear.php.net/dtd/package-2.0.xsd">
     <file name="004.phpt" role="test" />
     <file name="bug70727.phpt" role="test" />
    </dir> <!-- //tests -->
+   <dir name="examples">
+    <file name="lzf.php" role="doc" />
+   </dir> <!-- //examples -->
    <dir name="lib">
     <file name="README" role="doc" />
     <file name="LICENSE" role="doc" />
