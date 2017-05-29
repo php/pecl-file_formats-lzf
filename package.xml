@@ -20,9 +20,9 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>mg@iceni.pl</email>
   <active>yes</active>
  </lead>
- <date>2017-03-28</date>
+ <date>2017-05-29</date>
  <version>
-  <release>1.6.6dev</release>
+  <release>1.6.6</release>
   <api>1.5.0</api>
  </version>
  <stability>
