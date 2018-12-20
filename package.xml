@@ -79,6 +79,21 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </extsrcrelease>
  <changelog>
   <release>
+ <date>2017-05-29</date>
+   <version>
+    <release>1.6.7dev</release>
+    <api>1.5.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+-
+   </notes>
+  </release>
+  <release>
    <date>2016-04-03</date>
    <version>
     <release>1.6.5</release>
