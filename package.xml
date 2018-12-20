@@ -22,7 +22,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </lead>
  <date>2017-05-29</date>
  <version>
-  <release>1.6.6</release>
+  <release>1.6.7dev</release>
   <api>1.5.0</api>
  </version>
  <stability>
@@ -31,7 +31,8 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
-- update bundled liblzf to 3.6
+- increase compression buffer up to 104% to avoid failure when output is larger than input
+- don't try to compress very large input (>4GB)
  </notes>
  <contents>
   <dir name="/">
@@ -40,6 +41,8 @@ http://pear.php.net/dtd/package-2.0.xsd">
     <file name="002.phpt" role="test" />
     <file name="003.phpt" role="test" />
     <file name="004.phpt" role="test" />
+    <file name="005.phpt" role="test" />
+    <file name="006.phpt" role="test" />
     <file name="bug70727.phpt" role="test" />
    </dir> <!-- //tests -->
    <dir name="examples">
@@ -81,7 +84,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <release>
  <date>2017-05-29</date>
    <version>
-    <release>1.6.7dev</release>
+    <release>1.6.6</release>
     <api>1.5.0</api>
    </version>
    <stability>
@@ -90,7 +93,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
    </stability>
    <license uri="http://www.php.net/license">PHP License</license>
    <notes>
--
+- update bundled liblzf to 3.6
    </notes>
   </release>
   <release>

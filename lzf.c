@@ -127,18 +127,24 @@ Return a string compressed with LZF */
 PHP_FUNCTION(lzf_compress)
 {
 	char *retval, *arg = NULL;
-	strsize_t arg_len, result;
+	strsize_t arg_len, out_len, result;
+
 
 	if (ZEND_NUM_ARGS() != 1 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
 
-	retval = emalloc(arg_len + LZF_MARGIN);
+	if (arg_len > UINT_MAX) { /* LZF library do not support support large strings */
+		RETURN_FALSE;
+	}
+
+	out_len = arg_len + MIN(UINT_MAX - arg_len, MAX(LZF_MARGIN, arg_len / 25));
+	retval = emalloc(out_len);
 	if (!retval) {
 		RETURN_FALSE;
 	}
 
-	result = lzf_compress(arg, arg_len, retval, arg_len + LZF_MARGIN);
+	result = lzf_compress(arg, arg_len, retval, out_len);
 	if (result == 0) {
 		efree(retval);
 		RETURN_FALSE;
