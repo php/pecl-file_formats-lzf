@@ -1,8 +1,8 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5, 7                                                     |
+  | PHP Version 5, 7, 8                                                  |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2018 The PHP Group                                |
+  | Copyright (c) 1997-2020 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -25,7 +25,7 @@ extern zend_module_entry lzf_module_entry;
 extern php_stream_filter_factory php_lzf_compress_filter_factory;
 extern php_stream_filter_factory php_lzf_decompress_filter_factory;
 
-#define PHP_LZF_VERSION "1.6.8-dev"
+#define PHP_LZF_VERSION "1.6.8"
 
 #ifdef PHP_WIN32
 #define PHP_LZF_API __declspec(dllexport)
