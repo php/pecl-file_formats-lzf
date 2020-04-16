@@ -247,7 +247,11 @@ static php_stream_filter_ops lzf_decompress_ops = {
 	"lzf.decompress"
 };
 
+#if PHP_VERSION_ID < 70200
 static php_stream_filter *lzf_compress_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)
+#else
+static php_stream_filter *lzf_compress_filter_create(const char *filtername, zval *filterparams, uint8_t persistent TSRMLS_DC)
+#endif
 {
 	php_lzf_filter_state *inst;
 
@@ -263,7 +267,11 @@ static php_stream_filter *lzf_compress_filter_create(const char *filtername, zva
 	return php_stream_filter_alloc(&lzf_compress_ops, inst, persistent);
 }
 
+#if PHP_VERSION_ID < 70200
 static php_stream_filter *lzf_decompress_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)
+#else
+static php_stream_filter *lzf_decompress_filter_create(const char *filtername, zval *filterparams, uint8_t persistent TSRMLS_DC)
+#endif
 {
 	php_lzf_filter_state *inst;
 
