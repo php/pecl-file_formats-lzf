@@ -1,8 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5, 7, 8                                                  |
-  +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2020 The PHP Group                                |
+  | Copyright (c) The PHP Group                                          |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -72,7 +70,7 @@ static int php_lzf_filter_state_ctor(php_lzf_filter_state *inst, int persistent)
 	return SUCCESS;
 }
 
-static void php_lzf_filter_state_dtor(php_lzf_filter_state *inst TSRMLS_DC)
+static void php_lzf_filter_state_dtor(php_lzf_filter_state *inst)
 {
 	pefree(inst->buffer, inst->persistent);
 }
@@ -82,7 +80,7 @@ static int lzf_compress_filter_append_bucket(
 	php_stream_filter_status_t *exit_status,
 	php_lzf_filter_state *inst,
 	php_stream_bucket_brigade *buckets_out,
-	int persistent TSRMLS_DC)
+	int persistent)
 {
 	int status;
 	size_t buffer_size;
@@ -115,11 +113,11 @@ static int lzf_compress_filter_append_bucket(
 	}
 
 	/* Create new bucket and append it */
-	new_bucket = php_stream_bucket_new(stream, output_buffer, buffer_size, 1, 0 TSRMLS_CC);
+	new_bucket = php_stream_bucket_new(stream, output_buffer, buffer_size, 1, 0);
 	if (!new_bucket)
 		goto fail_free_buffer;
 
-	php_stream_bucket_append(buckets_out, new_bucket TSRMLS_CC);
+	php_stream_bucket_append(buckets_out, new_bucket);
 
 	/* Clear our buffer */
 	inst->buffer_pos = 0; 
@@ -143,7 +141,7 @@ static int lzf_compress_append_data(
 	const char *input_buffer,
 	size_t input_buffer_len,
 	size_t *consumed,
-	int persistent TSRMLS_DC)
+	int persistent)
 {
 	size_t free_buffer;
 	size_t bytes_to_copy;
@@ -162,7 +160,7 @@ static int lzf_compress_append_data(
 
 		/* If the buffer is full, we need to flush it */
 		if (inst->buffer_pos == LZF_BLOCKSIZE) {
-			if (lzf_compress_filter_append_bucket(stream, exit_status, inst, buckets_out, persistent TSRMLS_CC) != SUCCESS)
+			if (lzf_compress_filter_append_bucket(stream, exit_status, inst, buckets_out, persistent) != SUCCESS)
 				return FAILURE;
 		}
 	}
@@ -176,7 +174,7 @@ static php_stream_filter_status_t lzf_compress_filter(
 	php_stream_bucket_brigade *buckets_in,
 	php_stream_bucket_brigade *buckets_out,
 	size_t *bytes_consumed,
-	int flags TSRMLS_DC)
+	int flags)
 {
 	size_t consumed = 0;
 	php_lzf_filter_state *inst = (php_lzf_filter_state *) Z_PTR(thisfilter->abstract);
@@ -186,20 +184,20 @@ static php_stream_filter_status_t lzf_compress_filter(
 	while (buckets_in->head) {
 		bucket = buckets_in->head;
 
-		php_stream_bucket_unlink(bucket TSRMLS_CC);
+		php_stream_bucket_unlink(bucket);
 
 		if (lzf_compress_append_data(stream, &exit_status, buckets_out, inst, bucket->buf, bucket->buflen, &consumed, 
-				php_stream_is_persistent(stream) TSRMLS_CC) != SUCCESS)
+				php_stream_is_persistent(stream)) != SUCCESS)
 			goto fail_free_bucket;
 
-		php_stream_bucket_delref(bucket TSRMLS_CC);
+		php_stream_bucket_delref(bucket);
 	}
 
 	if (bytes_consumed)
 		*bytes_consumed = consumed;
 
 	if (flags & PSFS_FLAG_FLUSH_CLOSE) {
-		if (lzf_compress_filter_append_bucket(stream, &exit_status, inst, buckets_out, php_stream_is_persistent(stream) TSRMLS_CC) != SUCCESS)
+		if (lzf_compress_filter_append_bucket(stream, &exit_status, inst, buckets_out, php_stream_is_persistent(stream)) != SUCCESS)
 			goto fail;
 	}
 
@@ -207,7 +205,7 @@ static php_stream_filter_status_t lzf_compress_filter(
 
 fail_free_bucket:
 	if (bucket != NULL)
-		php_stream_bucket_delref(bucket TSRMLS_CC);
+		php_stream_bucket_delref(bucket);
 fail:
 	return PSFS_ERR_FATAL;
 }
@@ -218,12 +216,12 @@ static php_stream_filter_status_t lzf_decompress_filter(
 	php_stream_bucket_brigade *buckets_in,
 	php_stream_bucket_brigade *buckets_out,
 	size_t *bytes_consumed,
-	int flags TSRMLS_DC)
+	int flags)
 {
 	return PSFS_PASS_ON;
 }
 
-static void lzf_filter_state_dtor(php_stream_filter *thisfilter TSRMLS_DC)
+static void lzf_filter_state_dtor(php_stream_filter *thisfilter)
 {
 #if PHP_MAJOR_VERSION < 7
 	assert(thisfilter->abstract != NULL);
@@ -231,7 +229,7 @@ static void lzf_filter_state_dtor(php_stream_filter *thisfilter TSRMLS_DC)
 	assert(Z_PTR(thisfilter->abstract) != NULL);
 #endif
 
-	php_lzf_filter_state_dtor((php_lzf_filter_state *) Z_PTR(thisfilter->abstract) TSRMLS_CC);
+	php_lzf_filter_state_dtor((php_lzf_filter_state *) Z_PTR(thisfilter->abstract));
 	pefree(Z_PTR(thisfilter->abstract), ((php_lzf_filter_state *) Z_PTR(thisfilter->abstract))->persistent);
 }
 
@@ -247,11 +245,7 @@ static php_stream_filter_ops lzf_decompress_ops = {
 	"lzf.decompress"
 };
 
-#if PHP_VERSION_ID < 70200
-static php_stream_filter *lzf_compress_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)
-#else
-static php_stream_filter *lzf_compress_filter_create(const char *filtername, zval *filterparams, uint8_t persistent TSRMLS_DC)
-#endif
+static php_stream_filter *lzf_compress_filter_create(const char *filtername, zval *filterparams, uint8_t persistent)
 {
 	php_lzf_filter_state *inst;
 
@@ -267,11 +261,7 @@ static php_stream_filter *lzf_compress_filter_create(const char *filtername, zva
 	return php_stream_filter_alloc(&lzf_compress_ops, inst, persistent);
 }
 
-#if PHP_VERSION_ID < 70200
-static php_stream_filter *lzf_decompress_filter_create(const char *filtername, zval *filterparams, int persistent TSRMLS_DC)
-#else
-static php_stream_filter *lzf_decompress_filter_create(const char *filtername, zval *filterparams, uint8_t persistent TSRMLS_DC)
-#endif
+static php_stream_filter *lzf_decompress_filter_create(const char *filtername, zval *filterparams, uint8_t persistent)
 {
 	php_lzf_filter_state *inst;
 

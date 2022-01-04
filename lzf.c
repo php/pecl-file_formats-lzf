@@ -1,8 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5, 7, 8                                                  |
-  +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2020 The PHP Group                                |
+  | Copyright (c) The PHP Group                                          |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -32,6 +30,7 @@
 #endif
 
 #if PHP_VERSION_ID < 80000
+#define RETURN_THROWS() return
 #include "lzf_legacy_arginfo.h"
 #else
 #include "lzf_arginfo.h"
@@ -40,9 +39,7 @@
 /* {{{ lzf_module_entry
 */
 zend_module_entry lzf_module_entry = {
-	#if ZEND_MODULE_API_NO >= 20010901
 	STANDARD_MODULE_HEADER,
-	#endif
 	"lzf",
 	ext_functions,
 	PHP_MINIT(lzf),
@@ -50,9 +47,7 @@ zend_module_entry lzf_module_entry = {
 	NULL,
 	NULL,
 	PHP_MINFO(lzf),
-	#if ZEND_MODULE_API_NO >= 20010901
 	PHP_LZF_VERSION,
-	#endif
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
@@ -65,8 +60,8 @@ ZEND_GET_MODULE(lzf)
 */
 PHP_MINIT_FUNCTION(lzf)
 {
-	php_stream_filter_register_factory("lzf.compress", &php_lzf_compress_filter_factory TSRMLS_CC);
-	php_stream_filter_register_factory("lzf.decompress", &php_lzf_decompress_filter_factory TSRMLS_CC);
+	php_stream_filter_register_factory("lzf.compress", &php_lzf_compress_filter_factory);
+	php_stream_filter_register_factory("lzf.decompress", &php_lzf_decompress_filter_factory);
 
 	return SUCCESS;
 }
@@ -76,8 +71,8 @@ PHP_MINIT_FUNCTION(lzf)
 */
 PHP_MSHUTDOWN_FUNCTION(lzf)
 {
-	php_stream_filter_unregister_factory("lzf.compress" TSRMLS_CC);
-	php_stream_filter_unregister_factory("lzf.decompress" TSRMLS_CC);
+	php_stream_filter_unregister_factory("lzf.compress");
+	php_stream_filter_unregister_factory("lzf.decompress");
 
 	return SUCCESS;
 }
@@ -110,11 +105,11 @@ Return a string compressed with LZF */
 PHP_FUNCTION(lzf_compress)
 {
 	char *retval, *arg = NULL;
-	strsize_t arg_len, out_len, result;
+	size_t arg_len, out_len, result;
 
 
-	if (ZEND_NUM_ARGS() != 1 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
+		RETURN_THROWS();
 	}
 
 	if (arg_len > UINT_MAX) { /* LZF library do not support support large strings */
@@ -135,7 +130,7 @@ PHP_FUNCTION(lzf_compress)
 
 	retval[result] = 0;
 
-	_RETVAL_STRINGL(retval, result);
+	RETVAL_STRINGL(retval, result);
 	efree(retval);
 }
 /* }}} */
@@ -145,12 +140,12 @@ Return a string decompressed with LZF */
 PHP_FUNCTION(lzf_decompress)
 {
 	char *arg = NULL;
-	strsize_t arg_len, result;
+	size_t arg_len, result;
 	char *buffer;
 	size_t buffer_size = 0;
 
-	if (ZEND_NUM_ARGS() != 1 || zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &arg, &arg_len) == FAILURE) {
-		WRONG_PARAM_COUNT;
+	if (zend_parse_parameters(ZEND_NUM_ARGS(), "s", &arg, &arg_len) == FAILURE) {
+		RETURN_THROWS();
 	}
 
 	do {
@@ -168,7 +163,7 @@ PHP_FUNCTION(lzf_decompress)
 
 	if (result == 0) {
 		if (errno == EINVAL) {
-			php_error(E_WARNING, "%s LZF decompression failed, compressed data corrupted", get_active_function_name(TSRMLS_C));
+			php_error(E_WARNING, "%s LZF decompression failed, compressed data corrupted", get_active_function_name());
 		}
 
 		efree(buffer);
@@ -177,7 +172,7 @@ PHP_FUNCTION(lzf_decompress)
 
 	buffer[result] = 0;
 
-	_RETVAL_STRINGL(buffer, result);
+	RETVAL_STRINGL(buffer, result);
 	efree(buffer);
 }
 /* }}} */
@@ -186,6 +181,10 @@ PHP_FUNCTION(lzf_decompress)
 Return 1 if lzf was optimized for speed, 0 for compression */
 PHP_FUNCTION(lzf_optimized_for)
 {
+	if (zend_parse_parameters_none() == FAILURE) {
+		RETURN_THROWS();
+	}
+
 #ifdef HAVE_LIBLZF
 	RETURN_FALSE;
 #else

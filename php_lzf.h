@@ -1,8 +1,6 @@
 /*
   +----------------------------------------------------------------------+
-  | PHP Version 5, 7, 8                                                  |
-  +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2020 The PHP Group                                |
+  | Copyright (c) The PHP Group                                          |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.01 of the PHP license,      |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -27,38 +25,11 @@ extern php_stream_filter_factory php_lzf_decompress_filter_factory;
 
 #define PHP_LZF_VERSION "1.7.0-dev"
 
-#ifdef PHP_WIN32
-#define PHP_LZF_API __declspec(dllexport)
-#else
-#define PHP_LZF_API
-#endif
-
-#ifdef ZTS
-#include "TSRM.h"
-#endif
-
 #define LZF_MARGIN	128
 
 PHP_MINFO_FUNCTION(lzf);
 PHP_MINIT_FUNCTION(lzf);
 PHP_MSHUTDOWN_FUNCTION(lzf);
-
-PHP_FUNCTION(lzf_compress);
-PHP_FUNCTION(lzf_decompress);
-PHP_FUNCTION(lzf_optimized_for);
-
-#if PHP_MAJOR_VERSION < 7
-typedef long zend_long;
-typedef int strsize_t;
-#define _RETVAL_STRINGL(a,l)  RETVAL_STRINGL(a,l,1)
-#define Z_PTR(p) (p)
-#else
-typedef size_t strsize_t;
-#define TSRMLS_C
-#define TSRMLS_CC
-#define TSRMLS_DC
-#define _RETVAL_STRINGL(a,l)  RETVAL_STRINGL(a,l)
-#endif
 
 #endif	/* PHP_LZF_H */
 

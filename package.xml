@@ -31,7 +31,8 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
--
+- drop support for PHP 7.1 and older
+- add type hinting
  </notes>
  <contents>
   <dir name="/">
@@ -71,10 +72,10 @@ http://pear.php.net/dtd/package-2.0.xsd">
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>7.2.0</min>
    </php>
    <pearinstaller>
-    <min>1.4.0b1</min>
+    <min>1.10</min>
    </pearinstaller>
   </required>
  </dependencies>
