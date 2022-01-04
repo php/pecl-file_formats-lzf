@@ -22,7 +22,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </lead>
  <date>2022-01-04</date>
  <version>
-  <release>1.7.0</release>
+  <release>1.7.1dev</release>
   <api>1.7.0</api>
  </version>
  <stability>
@@ -31,8 +31,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
-- drop support for PHP 7.1 and older
-- add type hinting
+-
  </notes>
  <contents>
   <dir name="/">
@@ -84,6 +83,22 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <configureoption default="no" name="enable-lzf-better-compression" prompt="Sacrifice speed in favour of compression ratio?" />
  </extsrcrelease>
  <changelog>
+  <release>
+   <date>2022-01-04</date>
+   <version>
+    <release>1.7.0</release>
+    <api>1.7.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+    - drop support for PHP 7.1 and older
+    - add type hinting
+   </notes>
+  </release>
   <release>
    <date>2020-04-16</date>
    <version>
