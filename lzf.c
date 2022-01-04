@@ -31,28 +31,11 @@
 #define PHP_LZF_ULTRA_FAST 1
 #endif
 
-ZEND_BEGIN_ARG_INFO_EX(lzf_arg_string, 0, 0, 1)
-  ZEND_ARG_INFO(0, string)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(lzf_arg_none, 0, 0, 0)
-ZEND_END_ARG_INFO()
-
-/* {{{ lzf_functions[]
-*
-* Every user visible function must have an entry in lzf_functions[].
-*/
-zend_function_entry lzf_functions[] = {
-	PHP_FE(lzf_compress,		lzf_arg_string)
-	PHP_FE(lzf_decompress,		lzf_arg_string)
-	PHP_FE(lzf_optimized_for,	lzf_arg_none)
-#ifdef PHP_FE_END
-	PHP_FE_END
+#if PHP_VERSION_ID < 80000
+#include "lzf_legacy_arginfo.h"
 #else
-	{NULL, NULL, NULL}	/* Must be the last line in lzf_functions[] */
+#include "lzf_arginfo.h"
 #endif
-};
-/* }}} */
 
 /* {{{ lzf_module_entry
 */
@@ -61,7 +44,7 @@ zend_module_entry lzf_module_entry = {
 	STANDARD_MODULE_HEADER,
 	#endif
 	"lzf",
-	lzf_functions,
+	ext_functions,
 	PHP_MINIT(lzf),
 	PHP_MSHUTDOWN(lzf),
 	NULL,

@@ -60,6 +60,9 @@ http://pear.php.net/dtd/package-2.0.xsd">
    <file name="CREDITS" role="doc" />
    <file name="LICENSE" role="doc" />
    <file name="lzf.c" role="src" />
+   <file name="lzf.stub.php" role="src" />
+   <file name="lzf_arginfo.h" role="src" />
+   <file name="lzf_legacy_arginfo.h" role="src" />
    <file name="lzf.dsp" role="src" />
    <file name="php_lzf.h" role="src" />
    <file name="filter.c" role="src" />
