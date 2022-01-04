@@ -22,7 +22,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </lead>
  <date>2022-01-04</date>
  <version>
-  <release>1.7.0-dev</release>
+  <release>1.7.0</release>
   <api>1.7.0</api>
  </version>
  <stability>
