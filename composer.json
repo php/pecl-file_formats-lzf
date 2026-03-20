@@ -1,0 +1,24 @@
+{
+    "name": "pecl/lzf",
+    "type": "php-ext",
+    "license": "PHP-3.01",
+    "description": "LZF compression",
+    "require": {
+        "php": ">= 7.2.0"
+    },
+    "php-ext": {
+        "extension-name": "lzf",
+        "configure-options": [
+		{
+			"name": "enable-lzf",
+		  	"description": "Enable lzf support"
+		}, {
+			"name": "enable-lzf-better-compression",
+		  	"description": "Sacrifice speed in favour of compression ratio"
+		}, {
+			"name": "with-liblzf",
+		  	"description": "Use system liblzf"
+		}
+	]
+    }
+}
