@@ -23,7 +23,7 @@ extern zend_module_entry lzf_module_entry;
 extern php_stream_filter_factory php_lzf_compress_filter_factory;
 extern php_stream_filter_factory php_lzf_decompress_filter_factory;
 
-#define PHP_LZF_VERSION "1.7.0"
+#define PHP_LZF_VERSION "1.7.1-dev"
 
 #define LZF_MARGIN	128
 
