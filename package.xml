@@ -20,7 +20,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>mg@iceni.pl</email>
   <active>yes</active>
  </lead>
- <date>2022-01-04</date>
+ <date>2026-07-17</date>
  <version>
   <release>1.7.1dev</release>
   <api>1.7.0</api>
@@ -31,7 +31,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>
--
+- fix for extended php_stream_filter_ops with seek method in PHP 8.6
  </notes>
  <contents>
   <dir name="/">
